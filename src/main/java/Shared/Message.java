@@ -1,24 +1,32 @@
 package Shared;
 
 public class Message {
-    /**
-     * Note: This class is used to represent structured data exchanged between the client and server
-     *       over sockets — such as requests, responses, or commands.
-     *
-     * This is NOT just a chat message class.
-     * It may be used to carry login information, commands, filenames, or other types of data,
-     * depending on the message type.
-     *
-     * You may use Java Serialization or JSON (e.g., via libraries like Gson or Jackson) to send this object.
-     *
-     * You are allowed — and sometimes expected — to modify or extend this class to suit your needs.
-     */
-    public int type; // e.g., 0 = login, 1 = chat message, 2 = file upload, etc.
-    public String sender;
-    public String content;    // chat text, filename, password, etc.
+    // enum simulation (Simulating it for simplicity)
+    public static final int LOGIN = 0;     // Login request
+    public static final int CHAT = 1;      // chat message
+    public static final int FILE_LIST = 2; // Request a list of files
+    public static final int FILE_UPLOAD = 3; // File upload
+    public static final int FILE_DOWNLOAD = 4; // Download the file
+    public static final int LOGIN_RESPONSE = 5; // login response
+    public static final int LOGOUT = 6;    // Logout request
 
-    public Message() {
+    public int type;         // Message type
+    public String sender;    // sender
+    public String content;   // Content (e.g. chat text, file name, or JSON data)
+    public long fileLength;  // File length (for upload and download)
 
+    public Message() {}
+
+    public Message(int type, String sender, String content) {
+        this.type = type;
+        this.sender = sender;
+        this.content = content;
     }
 
+    public Message(int type, String sender, String content, long fileLength) {
+        this.type = type;
+        this.sender = sender;
+        this.content = content;
+        this.fileLength = fileLength;
+    }
 }
